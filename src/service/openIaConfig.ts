@@ -1,13 +1,15 @@
-import { Configuration, OpenAIApi } from "openai";
+import { Configuration, OpenAIApi } from 'openai'
 
 export function openIaConfig() {
-    const configuration = new Configuration({
+  const configuration = new Configuration({
     apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-    });
+  })
 
-    const openai = new OpenAIApi(configuration);
+  delete configuration.baseOptions.headers['User-Agent']
 
-    return {
-        openai
-    }
+  const openai = new OpenAIApi(configuration)
+
+  return {
+    openai,
+  }
 }
