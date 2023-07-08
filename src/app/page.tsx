@@ -17,7 +17,7 @@ export default function Home() {
   } = useGenerateImg()
 
   return (
-    <div className="h-screen w-full bg-zinc-800 text-zinc-100 flex flex-col items-center justify-center">
+    <div className="h-screen w-full bg-zinc-800 text-zinc-100 flex flex-col items-center justify-center px-4">
       <main className="max-w-2xl w-full">
         <h1 className="text-2xl text-violet-500 font-bold mt-16">
           Descreva sua criacao em detalhes
@@ -29,7 +29,7 @@ export default function Home() {
           <Form.Field name="prompt">
             <Form.Control asChild>
               <textarea
-                className="bg-zinc-900 border-none rounded text-zinc-50 p-4 w-full h-40 text-base"
+                className="bg-zinc-900 border-none rounded text-zinc-50 p-4 w-full h-64 text-base"
                 placeholder={placeholder || 'Deixe sua criatividade rolar'}
                 value={prompt}
                 onChange={(event) => setPrompt(event.target.value)}
