@@ -5,6 +5,7 @@ import * as Form from '@radix-ui/react-form';
 import { openIaConfig } from "@/service/openIaConfig"
 import { ImagesResponseDataInner } from "openai";
 import { LoadingSpinner } from "@/components/Spinner";
+import {saveAs} from "file-saver"
 
 export default function Home() {
   const [prompt, setPrompt] = useState('')
@@ -31,10 +32,17 @@ export default function Home() {
     }
   }
 
+  function downloadImg(urlImg?: string){
+    if(urlImg){
+      saveAs(urlImg, 'img-01')
+    }
+  }
+
   return (
     <div className="h-screen w-full bg-zinc-800 text-zinc-100 flex flex-col items-center justify-center">
       <main className="max-w-2xl w-full">
-        <h1 className="text-xl text-gray-300 font-bold mb-8 mt-16">Descreva sua criacao em detalhes</h1>
+        <h1 className="text-2xl text-violet-500 font-bold mt-16">Descreva sua criacao em detalhes</h1>
+        <h2 className="text-xl text-zinc-200 mt-4 mb-8">Gere imagens com inteligencia artifical gratuito.</h2>
         <Form.Root onSubmit={handleGenerateImg}>
           <Form.Field name="prompt">
             <Form.Control asChild>
@@ -66,7 +74,11 @@ export default function Home() {
           imgs && (
             <div className="flex items-center justify-center gap-2 flex-wrap mt-8">
               {
-                imgs?.map((img, index) => <img className="rounded-sm overflow-hidden" key={index} alt={prompt} src={img.url} />)
+                imgs?.map((img, index) => (
+                    <button key={index} type="button" onClick={() => downloadImg(img.url)}>
+                      <img className="rounded-sm overflow-hidden" onClick={() => null} alt={prompt} src={img.url} />
+                    </button>
+                ))
               }
             </div>
           )
